@@ -6,7 +6,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Simple JS Action
-              uses: actions/hello-worl-javascript-action@main
+              uses: actions/hello-world-javascript-action@main
               with:
                     who-to-greet: Amar
             - name: Log Greeting Time
