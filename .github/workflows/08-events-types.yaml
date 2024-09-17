@@ -1,6 +1,11 @@
 name: Repository Events
 on:
     push:
+        # branches:
+            # - main
+            # - "feature/*" #matches feature/featA, feature/featB, does not match feature/featA/featB
+            # - "feature/**" # matches feature/feata, feature/featB, feature/featA/featB
+            # - "!feature/featA"
     pull_request:
         types: [opened, assigned, reopened, synchronize]
     issues:
