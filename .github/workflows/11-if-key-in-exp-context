@@ -5,7 +5,7 @@ run-name: "Expressions & Contexts by @${{ github.actor }}, event:
 jobs:
     using-expressions-and-contexts:
         runs-on: ubuntu-latest
-        if: ${{ github.event_name }} == 'push'
+        if: github.event_name  == 'push'
         steps:
             - name: Expressions
               id: expressions
@@ -18,7 +18,7 @@ jobs:
                 echo ${{ 'string' == 'String' }}
                 echo ${{ true && false }}
             - name: Dump Contexts
-              run:
+              run: |
                 echo '${{ toJson(github)}}'
                 echo '${{ toJson(job)}}'
                 echo '${{ toJson(secrets)}}'
