@@ -1,4 +1,4 @@
-name: First workflow
+name: Start workflow
 on: push
 
 jobs:
