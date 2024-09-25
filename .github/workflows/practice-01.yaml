@@ -9,6 +9,6 @@ jobs:
             run: echo "Hi Amar"
           - name: Amar outputs multiple line run-shell-commands
             run: |
-              node -V
-              npm -V
-              java -V
+              node -v
+              npm -v
+              java -v
