@@ -1,13 +1,9 @@
-name: Start workflow
+name: Amar practicing
 on: push
 
 jobs:
-    run-shell-commands:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Amar echos a string
-            run: echo "Hi Amar"
-          - name: Amar outputs multiple line run-shell-commands
-            run: |
-              node -v
-              npm -v
+  run-shell-commands:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo test
+        run: echo "Amar Testing"
