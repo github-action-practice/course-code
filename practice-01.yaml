@@ -1,0 +1,13 @@
+name: First workflow
+on: push
+
+jobs:
+    run-shell-commands:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Amar echos a string
+            run: echo "Hi Amar"
+          - name: Amar outputs multiple line run-shell-commands
+            run: |
+              node -V
+              npm -V
