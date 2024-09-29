@@ -1,0 +1,11 @@
+name: practicing checkout
+on: [push]
+
+jobs:
+    object-to-checkout:
+        runs-on: ubuntu-latest
+        steps:
+            - name: shell commands
+              run: ls -l
+            - name: checking out checkout action
+              uses: actions/checkout@v4
