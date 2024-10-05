@@ -1,9 +1,22 @@
-name: Practicing Greeting again
+name: Practicing Parallel & Dependent Jobs
 on: [push]
 
 jobs:
-    greeting-object:
+    Run-shell-Commands:
         runs-on: ubuntu-latest
-        steps: 
-            - name: 'Greeting The user'
+        steps:
+            - name: Job 1
+              run: echo "node -v"
+    Parallel-Job-Object:
+        runs-on: macos-latest
+        steps:
+            - name: Job 2
               run: echo "Hello Amar"
+    Dependent-Job-Object:
+        runs-on: ubuntu-
+        needs: Run-shell-Commands
+        steps:
+            - name: Job 3
+              run: echo "Hello Im a dependent Job"
+
+
