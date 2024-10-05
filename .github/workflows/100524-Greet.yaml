@@ -6,7 +6,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Job 1
-              run: echo npm -v
+              run: |
+                npm -v
+                node -v
     Parallel-Job-Object:
         runs-on: macos-latest
         steps:
