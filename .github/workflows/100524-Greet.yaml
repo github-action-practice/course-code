@@ -1,13 +1,16 @@
-name: Print Working Dir & shells
+name: Copy files from Repository to runner machine
 on: [push]
 
+
 jobs:
-    display-inbuilt-dir-shells-obj:
+    copy-repo-object:
         runs-on: ubuntu-latest
         steps:
-            - name: Github names
+            - name: checkout
               run: |
-                echo $GITHUB_SHA
-                echo $GITHUB_REPOSITORY
-                echo $GITHUB_WORKSPACE
-
+                git init
+                git remote add origin "https://GITHUB_ACTOR${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY.git"
+                git fetch origin
+                git checkout main
+            - name: list files
+              run: ls -a
