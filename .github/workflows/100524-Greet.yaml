@@ -1,0 +1,9 @@
+name: Practicing Greeting again
+on: [push]
+
+jobs:
+    greeting-object:
+        runs-on: ubuntu-latest
+        steps: 
+            - name: 'Greeting The user'
+              run: echo "Hello Amar"
