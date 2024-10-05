@@ -6,7 +6,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Job 1
-              run: echo node -v
+              run: echo node -V
     Parallel-Job-Object:
         runs-on: macos-latest
         steps:
