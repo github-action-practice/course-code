@@ -13,7 +13,7 @@ jobs:
             - name: Job 2
               run: echo "Hello Amar"
     Dependent-Job-Object:
-        runs-on: ubuntu-
+        runs-on: ubuntu-latest
         needs: Run-shell-Commands
         steps:
             - name: Job 3
