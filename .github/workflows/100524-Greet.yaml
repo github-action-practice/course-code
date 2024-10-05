@@ -1,12 +1,13 @@
-name: setting error messages and warnings
+name: Print Working Dir & shells
 on: [push]
 
 jobs:
-    setting-messages-object:
+    display-inbuilt-dir-shells-obj:
         runs-on: ubuntu-latest
         steps:
-            - name: Setting and error message
-              run: echo "::error::missing semicolon"
-            - name: Setting error message with params"
-              run: echo "::error title:Error Title, file=app.js, line = 2, endline=3, col=5, endcolumn=7::missing semicolon"
-  
+            - name: Github names
+              run: |
+                echo $GITHUB_SHA
+                echo $GITHUB_REPOSITORY
+                echo $GITHUB_WORKSPACE
+
