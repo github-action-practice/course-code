@@ -8,7 +8,7 @@ jobs:
     steps: 
       - name: using action
         id: greet
-        uses: action/hello-world-javascript-action@a5188c871c8bf440b511e0a76dd8e0bd8d3fe0b0
+        uses: actions/hello-world-javascript-action@a5188c871c8bf440b511e0a76dd8e0bd8d3fe0b0
         with:
           who-to-greet: Amar
       - name: Log greeting time
