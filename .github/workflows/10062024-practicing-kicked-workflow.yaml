@@ -1,0 +1,11 @@
+name: workflow run
+on:
+    workflow_run:
+        workflows: [practicing running on dependent workflows]
+        types: [completed]
+
+jobs:
+    kicked-job-object:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "i was triggered because 'practicing running on dependent workflows' was completed"

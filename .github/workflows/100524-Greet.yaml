@@ -1,10 +1,21 @@
-name: Practicing checkout actions
-on: [push]
+name: practicing running on dependent workflows
+on: 
+  push:
+  pull_request:
+    types: [opened, assigned, reopened, synchronize]
+  issues:
+    types: [opened]
+
+
 
 jobs:
-  checkout-action-object:
+  workflow-one:
     runs-on: ubuntu-latest
     steps:
-      - name: Test checkout
-        run: ls -l
+      - name: running one
+        run: |
+          echo: $GITHUB_SHA
+          echo: $GITHUB_REF
       - uses: actions/checkout@v4
+
+
