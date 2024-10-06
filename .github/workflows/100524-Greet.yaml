@@ -1,15 +1,10 @@
-name: Practicing actions
+name: Practicing checkout actions
 on: [push]
 
-
 jobs:
-  actions-objects:
+  checkout-action-object:
     runs-on: ubuntu-latest
-    steps: 
-      - name: using action
-        id: greet
-        uses: actions/hello-world-javascript-action@a5188c871c8bf440b511e0a76dd8e0bd8d3fe0b0
-        with:
-          who-to-greet: Amar
-      - name: Log greeting time
-        run: echo "${{ steps.greet.outputs.time}}"
+    steps:
+      - name: Test checkout
+        run: ls -l
+      - uses: actions/checkout@v4
