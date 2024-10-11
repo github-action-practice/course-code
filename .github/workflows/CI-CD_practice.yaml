@@ -1,0 +1,89 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v1
+
+      - name: Create results directory
+        run: mkdir -p results && chmod 777 results
+
+      - name: Run Robot Framework Tests
+        run: |
+          docker run --shm-size=1g \
+            -v ${PWD}:/opt/robotframework/tests:Z \
+            -v ${PWD}/results:/opt/robotframework/results:Z \
+            -e ROBOT_OPTIONS="--outputdir /opt/robotframework/results" \
+            ppodgorsek/robot-framework:latest
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: results
+
+  merge:
+    needs: test
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Merge to Master
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          
+          echo "Event name: ${{ github.event_name }}"
+          echo "GitHub ref: ${{ github.ref }}"
+          echo "Pull Request head ref: ${{ github.event.pull_request.head.ref }}"
+          echo "Pull Request head sha: ${{ github.event.pull_request.head.sha }}"
+          
+          git fetch origin master
+          git checkout master
+          
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "Merging Pull Request"
+            git fetch origin ${{ github.event.pull_request.head.ref }}
+            git merge --no-ff FETCH_HEAD -m "Merge pull request #${{ github.event.pull_request.number }}"
+          elif [ "${{ github.event_name }}" == "push" ]; then
+            if [ "${{ github.ref }}" != "refs/heads/master" ]; then
+              echo "Merging pushed branch into master"
+              git fetch origin ${{ github.ref }}
+              git merge --no-ff FETCH_HEAD -m "Merge branch '${{ github.ref }}' into master"
+            else
+              echo "Push directly to master, no merge needed"
+            fi
+          fi
+          
+          echo "Pushing changes"
+          git push origin master || echo "Push failed"
+      - name: Check Master Branch
+        run: |
+          git checkout master
+          git log -1
+          echo "Current branch: $(git branch --show-current)"
+  deploy:
+    needs: merge
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to Production
+        run: |
+          # Add your deployment steps here
+          echo "Deploying to production"
+      - name: Run Post-Deployment Tests
+        run: |
+          # Add your post-deployment test steps here
+          echo "Running post-deployment tests"
